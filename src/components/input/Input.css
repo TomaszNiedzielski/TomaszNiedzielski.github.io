@@ -1,0 +1,18 @@
+.chat-input {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #ccc;
+    padding: 0 10px;
+}
+.chat-input input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px 5px;
+}
+.chat-input input::placeholder {
+    font-weight: bold;
+}
+.chat-input img {
+    height: 26px;
+}
