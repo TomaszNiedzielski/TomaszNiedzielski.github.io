@@ -8,11 +8,18 @@
     width: 100%;
     border: none;
     outline: none;
-    padding: 10px 5px;
+    padding: 14px 5px;
+    font-size: 15px;
 }
 .chat-input input::placeholder {
     font-weight: bold;
 }
 .chat-input img {
     height: 26px;
+}
+
+@media screen and (min-width: 700px) {
+    .chat-input input {
+        font-size: 13px;
+    }
 }

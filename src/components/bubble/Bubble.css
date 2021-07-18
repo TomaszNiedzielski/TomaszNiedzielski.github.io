@@ -11,10 +11,10 @@
     justify-content: flex-end;
 }
 .chat-bubble__content {
-    padding: 5px 8px;
+    padding: 10px;
     border-radius: 15px;
     max-width: 70%;
-    font-size: 14px;
+    font-size: 15px;
     margin: 0 5px;
 }
 .chat-bubble--left .chat-bubble__content {
@@ -31,4 +31,11 @@
     width: 30px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+@media screen and (min-width: 700px) {
+    .chat-bubble__content {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
 }

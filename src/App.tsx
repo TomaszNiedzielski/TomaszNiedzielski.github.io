@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Chat, { Message } from './components/chat/Chat';
+import moment from 'moment';
+import Moment from 'react-moment';
 
 const fakeMessages: Message[] = [
     {
         text: 'Hello world!',
-        createdAt: '15-07-2021 14:40:02',
+        createdAt: '2021-07-17 10:40:35',
         user: {
             id: 1
         }
     },
     {
         text: 'Hello, I am a bot!',
-        createdAt: '15-07-2021 14:40:05',
+        createdAt: '2021-07-17 10:43:35',
         user: {
             id: 2,
             avatar: 'https://bodysize.org/wp-content/uploads/2018/01/Mia-Malkova-480x640.jpg'
@@ -20,7 +22,7 @@ const fakeMessages: Message[] = [
     },
     {
         text: 'My job is to respond to you!',
-        createdAt: '15-07-2021 14:40:05',
+        createdAt: '2021-07-17 10:45:35',
         user: {
             id: 2,
             avatar: 'https://bodysize.org/wp-content/uploads/2018/01/Mia-Malkova-480x640.jpg'
@@ -38,13 +40,14 @@ const App: React.FC = () => {
         setMessages(updatedMessages);
     }
 
+
     const onSendBotMessage = () => {
         if(!botMessage) return;
 
         console.log(botMessage);
         const updatedMessages: Message[] = [...messages, {
             text: botMessage,
-            createdAt: '17-07-2021 10:10:10',
+            createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
             user: {
                 id: 2,
                 avatar: 'https://bodysize.org/wp-content/uploads/2018/01/Mia-Malkova-480x640.jpg'
@@ -86,14 +89,14 @@ const App: React.FC = () => {
         window.setTimeout(() => {
             updatedMessages = [...messages, {
                 text: botMessage,
-                createdAt: '17-07-2021 10:10:10',
+                createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
                 user: {
                     id: 2,
                     avatar: 'https://bodysize.org/wp-content/uploads/2018/01/Mia-Malkova-480x640.jpg'
                 }
             }];
 
-            // setMessages(updatedMessages);
+            setMessages(updatedMessages);
         }, 1000);
 
     }, [messages]);
@@ -102,18 +105,16 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
-            <div>
+            {/* <div>
                 <input
                     type="text"
                     value={botMessage}
                     onChange={e => setBotMessage(e.target.value)}
                 />
                 <button onClick={onSendBotMessage}>wyślij</button>
-            </div>
+            </div> */}
             <Chat
-                user={{
-                    id: 1
-                }}
+                user={{ id: 1 }}
                 minimized={false}
                 messages={messages}
                 onSend={(message: Message) => onSend(message)}
@@ -121,5 +122,4 @@ const App: React.FC = () => {
         </div>
     );
 }
-
 export default App;

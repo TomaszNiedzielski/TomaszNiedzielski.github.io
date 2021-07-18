@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Message, User } from '../chat/Chat';
 import './Input.css';
+import moment from 'moment';
 
 interface Props {
     onSend: (message: Message) => void;
@@ -10,11 +11,12 @@ interface Props {
 const Input: React.FC<Props> = ({ user, onSend }) => {
     const [value, setValue] = useState<string>('');
     const [message, setMessage] = useState<Message>();
+    const el = useRef() as React.MutableRefObject<HTMLInputElement>;
 
     useEffect(() => {
         setMessage({
             text: value,
-            createdAt: '15-07-2021 12:12:12',
+            createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
             user: user
         });
     }, [value]);
@@ -24,6 +26,7 @@ const Input: React.FC<Props> = ({ user, onSend }) => {
             onSend(message);
         }
         setValue('');
+        el.current.focus();
     }
 
     const handleKeyDown = (e: any) => {
@@ -40,6 +43,7 @@ const Input: React.FC<Props> = ({ user, onSend }) => {
                 value={value}
                 onChange={e => setValue(e.target.value)}
                 onKeyDown={handleKeyDown}
+                ref={el}
             />
             {value.length > 0 && <img src="/assets/send.png" alt="send" onClick={send} />}
         </div>

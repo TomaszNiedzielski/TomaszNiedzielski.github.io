@@ -8,8 +8,7 @@ interface Props {
 const Header: React.FC<Props> = ({ minimize }) => {
     return (
         <header className="chat-header">
-            <div></div>
-            <div>
+            <div className="chat-header__title">
                 <b>Bot Demo</b>
             </div>
             <img src="/assets/minimize.png" alt="minimize" className="chat-header__minimize" onClick={minimize} />

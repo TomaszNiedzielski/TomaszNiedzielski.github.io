@@ -1,7 +1,9 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './Body.css';
 import Bubble, { Position } from '../bubble/Bubble';
 import { Message, User } from '../chat/Chat';
+import moment from 'moment';
+import Timestamp from '../timestamp/Timestamp';
 
 interface Props {
     messages: Message[];
@@ -9,7 +11,7 @@ interface Props {
 }
 
 const Body: React.FC<Props> = ({ messages, user }) => {
-    let el = React.useRef() as React.MutableRefObject<HTMLInputElement>;
+    const el = React.useRef() as React.MutableRefObject<HTMLDivElement>;
 
     useEffect(() => {
         el.current.scrollIntoView();
@@ -61,8 +63,19 @@ const Body: React.FC<Props> = ({ messages, user }) => {
                     style = setStylesForLeftPositionedBubbles(messages, i);
                 }
 
+                console.log('licz');
+                let isTimeStamp = true;
+                if(messages[i-1]) {
+                    const diff = moment(message.createdAt).diff(moment(messages[i-1].createdAt), 'minutes');
+                    if(diff < 5) {
+                        isTimeStamp = false;
+                    }
+                    console.log(diff);
+                }
+
                 return (
-                    <div style={messages[i+1] && message.user.id !== messages[i+1].user.id ? { marginBottom: '8px' } : {}}>
+                    <div style={messages[i+1] ? (message.user.id !== messages[i+1].user.id ? { marginBottom: '8px' } : {}) : { marginBottom: '8px' }}>
+                        {isTimeStamp ? <Timestamp date={message.createdAt} /> : null}
                         <Bubble
                             message={message}
                             position={position}
