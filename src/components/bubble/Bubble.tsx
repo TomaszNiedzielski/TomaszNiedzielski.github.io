@@ -1,6 +1,6 @@
 import React from 'react';
-import { Message } from '../chat/Chat';
 import './Bubble.css';
+import { Message } from '../chat/Chat';
 
 export type Position = 'left' | 'right';
 

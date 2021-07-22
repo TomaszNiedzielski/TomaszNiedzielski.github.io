@@ -10,6 +10,6 @@ const Avatar: React.FC<Props> = ({ source }) => {
         <div className="chat-message__avatar">
             <img src={source} alt="avatar" />
         </div>
-    )
+    );
 }
 export default Avatar;

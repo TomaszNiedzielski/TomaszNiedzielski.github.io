@@ -11,10 +11,10 @@ const Header: React.FC<Props> = ({ title, minimize, headerAvatar }) => {
     return (
         <header className="chat-header">
             <div className="d-flex align-items-center">
-                <div className="chat-header__avatar">
+                {headerAvatar && <div className="chat-header__avatar">
                     <img src={headerAvatar} alt="avatar" />
-                </div>
-                <div className="chat-header__title">{title ? title : 'Bot Demo'}</div>
+                </div>}
+                <div className="chat-header__title">{title ? title : 'Chat Demo'}</div>
             </div>
             <img src="/assets/minimize.png" alt="minimize" className="chat-header__minimize" onClick={minimize} />
         </header>

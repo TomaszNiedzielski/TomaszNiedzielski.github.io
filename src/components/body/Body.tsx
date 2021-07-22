@@ -26,7 +26,6 @@ const Body: React.FC<Props> = ({ messages, user, isTyping }) => {
     }, [messages, user]);
 
     const setStylesForBubbles = (messages: Message[], i: number, position: Position) => {
-        let style;
         const currentMessage = messages[i];
         const previousMessage = messages[i-1];
         const nextMessage = messages[i+1];
@@ -132,8 +131,8 @@ const Body: React.FC<Props> = ({ messages, user, isTyping }) => {
                 }
 
                 return (
-                    <div style={nextMessage ? (message.user.id !== nextMessage.user.id ? { marginBottom: '8px' } : {}) : { marginBottom: '8px' }}>
-                        {isTimeStamp ? <Timestamp date={message.createdAt} /> : null}
+                    <div key={i} style={nextMessage ? (message.user.id !== nextMessage.user.id ? { marginBottom: '8px' } : {}) : { marginBottom: '8px' }}>
+                        {isTimeStamp && message.createdAt ? <Timestamp date={message.createdAt} /> : null}
 
                         <div className="chat-body__message">
                             {message.user.avatar && isAvatarVisible && <Avatar source={message.user.avatar} />}

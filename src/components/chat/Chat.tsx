@@ -14,7 +14,7 @@ export interface User {
 
 export interface Message {
     text: string;
-    createdAt: string;
+    createdAt?: string;
     user: User;
 }
 
@@ -23,7 +23,7 @@ interface Props {
     minimized?: boolean;
     messages: Message[];
     user: User;
-    onSend: (message: Message) => void;
+    onSend?: (message: Message) => void;
     isTyping?: boolean;
     onInputTextChanged?: (value: string) => void;
     headerAvatar?: string;
@@ -49,7 +49,7 @@ const Chat: React.FC<Props> = ({ title, minimized, messages, user, onSend, isTyp
                 />
                 <Input
                     user={user}
-                    onSend={(message: Message) => onSend(message)}
+                    onSend={onSend}
                     onInputTextChanged={onInputTextChanged}
                 />
             </div>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Message, User } from '../chat/Chat';
 import './Input.css';
+import { Message, User } from '../chat/Chat';
 import moment from 'moment';
 
 interface Props {
-    onSend: (message: Message) => void;
+    onSend?: (message: Message) => void;
     user: User;
     onInputTextChanged?: (value: string) => void;
 }
@@ -24,7 +24,7 @@ const Input: React.FC<Props> = ({ user, onSend, onInputTextChanged }) => {
     }, [value]);
     
     const send = () => {
-        if(message) {
+        if(message && onSend) {
             onSend(message);
         }
         setValue('');

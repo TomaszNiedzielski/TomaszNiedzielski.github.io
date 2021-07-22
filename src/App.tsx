@@ -78,8 +78,8 @@ const App: React.FC = () => {
             onSendBotMessage();
         }
     }
-console.log(messages);
-    //sztuczna inteligencja script
+
+    // sztuczna inteligencja script
 
     useEffect(() => {
         if(messages[messages.length-1]?.user.id !== 1) return;
@@ -155,14 +155,14 @@ console.log(messages);
                 <button onClick={onSendBotMessage}>wyślij</button>
             </div>
             <Chat
-                title="Asystent zakupu - p0lka"
+                title="Mia Malkova"
                 headerAvatar="https://bodysize.org/wp-content/uploads/2018/01/Mia-Malkova-480x640.jpg"
                 user={{ id: 1 }}
-                minimized={false}
+                // minimized={false}
                 messages={messages}
                 onSend={(message: Message) => onSend(message)}
                 isTyping={isTyping}
-                onInputTextChanged={(value) => {console.log(value)}}
+                // onInputTextChanged={(value) => {console.log(value)}}
             />
         </div>
     );
