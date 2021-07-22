@@ -19,13 +19,17 @@ export interface Message {
 }
 
 interface Props {
+    title?: string;
     minimized?: boolean;
     messages: Message[];
     user: User;
     onSend: (message: Message) => void;
+    isTyping?: boolean;
+    onInputTextChanged?: (value: string) => void;
+    headerAvatar?: string;
 }
 
-const Chat: React.FC<Props> = ({ minimized, messages, user, onSend }) => {
+const Chat: React.FC<Props> = ({ title, minimized, messages, user, onSend, isTyping, onInputTextChanged, headerAvatar }) => {
     const [isMinimized, setIsMinimized] = useState(minimized);
 
     if(isMinimized) {
@@ -34,15 +38,19 @@ const Chat: React.FC<Props> = ({ minimized, messages, user, onSend }) => {
         return (
             <div className="chat-container">
                 <Header
+                    title={title}
                     minimize={() => setIsMinimized(true)}
+                    headerAvatar={headerAvatar}
                 />
                 <Body
                     user={user}
                     messages={messages}
+                    isTyping={isTyping}
                 />
                 <Input
                     user={user}
                     onSend={(message: Message) => onSend(message)}
+                    onInputTextChanged={onInputTextChanged}
                 />
             </div>
         );

@@ -3,6 +3,9 @@
     align-items: center;
     border-top: 1px solid #ccc;
     padding: 0 10px;
+    position: sticky;
+    bottom: 0;
+    background-color: white;
 }
 .chat-input input {
     width: 100%;

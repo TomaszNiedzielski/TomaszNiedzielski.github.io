@@ -5,15 +5,17 @@ import moment from 'moment';
 
 interface Props {
     onSend: (message: Message) => void;
-    user: User
+    user: User;
+    onInputTextChanged?: (value: string) => void;
 }
 
-const Input: React.FC<Props> = ({ user, onSend }) => {
+const Input: React.FC<Props> = ({ user, onSend, onInputTextChanged }) => {
     const [value, setValue] = useState<string>('');
     const [message, setMessage] = useState<Message>();
     const el = useRef() as React.MutableRefObject<HTMLInputElement>;
 
     useEffect(() => {
+        onInputTextChanged && onInputTextChanged(value);
         setMessage({
             text: value,
             createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),

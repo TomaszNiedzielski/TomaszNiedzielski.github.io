@@ -1,7 +1,7 @@
 .chat-bubble__wrapper {
     display: flex;
-    margin: 2px;
-    
+    margin: 2px 0;
+    width: 100%;
 }
 .chat-bubble--left {
     align-self: flex-start;
@@ -15,22 +15,16 @@
     border-radius: 15px;
     max-width: 70%;
     font-size: 15px;
-    margin: 0 5px;
 }
 .chat-bubble--left .chat-bubble__content {
     display: flex;
     background-color: #ddd;
+    margin-left: 5px;
 }
 .chat-bubble--right .chat-bubble__content {
     display: flex;
     background-color: #0a4ff2;
     color: white;
-}
-.chat-bubble__avatar {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    object-fit: cover;
 }
 
 @media screen and (min-width: 700px) {

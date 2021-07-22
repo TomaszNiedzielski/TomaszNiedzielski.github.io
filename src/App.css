@@ -2,3 +2,22 @@
     width: 100vw;
     height: 100vh;
 }
+.friend-input {
+    display: none;
+}
+@media screen and (min-width: 700px) {
+    .friend-input {
+        display: block;
+    }
+}
+
+/* some global styles */
+.d-flex {
+    display: flex;
+}
+.justify-content-center {
+    justify-content: center;
+}
+.align-items-center {
+    align-items: center;
+}
