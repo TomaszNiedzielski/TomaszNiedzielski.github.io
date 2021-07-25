@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './Body.css';
 import Bubble, { Position } from '../bubble/Bubble';
 import { Message, User } from '../chat/Chat';
 import moment from 'moment';

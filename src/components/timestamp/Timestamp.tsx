@@ -1,5 +1,4 @@
 import React from 'react';
-import './Timestamp.css';
 import Moment from 'react-moment';
 import moment from 'moment';
 

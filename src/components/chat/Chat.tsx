@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import Header from '../header/Header';
 import Body from '../body/Body';
 import Input from '../input/Input';
-
-import './Chat.css';
 import Widget from '../widget/Widget';
 
 export interface User {
@@ -13,6 +11,7 @@ export interface User {
 }
 
 export interface Message {
+    id?: number | string;
     text: string;
     createdAt?: string;
     user: User;

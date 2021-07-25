@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Chat, { Message } from './components/chat/Chat';
+import './components/index.css';
 import moment from 'moment';
 import 'moment/locale/pl';
 
 const fakeMessages: Message[] = [
     {
+        id: 1,
         text: 'Hello world!',
         createdAt: '2021-07-17 10:40:35',
         user: {
