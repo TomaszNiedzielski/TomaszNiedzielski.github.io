@@ -10,9 +10,13 @@ interface Props {
     messages: Message[];
     user: User;
     isTyping?: boolean;
+    leftBubbleStyle?: object;
+    rightBubbleStyle?: object;
+    backgroundColor?: string;
+    timestampStyle?: object;
 }
 
-const Body: React.FC<Props> = ({ messages, user, isTyping }) => {
+const Body: React.FC<Props> = ({ messages, user, isTyping, leftBubbleStyle, rightBubbleStyle, backgroundColor, timestampStyle }) => {
     const el = React.useRef() as React.MutableRefObject<HTMLDivElement>;
     const [typingUserAvatar, setTypingUserAvatar] = useState<string | undefined>();
 
@@ -87,7 +91,7 @@ const Body: React.FC<Props> = ({ messages, user, isTyping }) => {
     }
 
     return (
-        <div className="chat-body">
+        <div className="chat-body" style={{ background: backgroundColor }}>
             {messages.map((message, i) => {
                 const previousMessage = messages[i-1];
                 const nextMessage = messages[i+1];
@@ -131,12 +135,12 @@ const Body: React.FC<Props> = ({ messages, user, isTyping }) => {
 
                 return (
                     <div key={i} style={nextMessage ? (message.user.id !== nextMessage.user.id ? { marginBottom: '8px' } : {}) : { marginBottom: '8px' }}>
-                        {isTimeStamp && message.createdAt ? <Timestamp date={message.createdAt} /> : null}
+                        {isTimeStamp && message.createdAt ? <Timestamp date={message.createdAt} style={timestampStyle} /> : null}
 
                         <div className="chat-body__message">
                             {message.user.avatar && isAvatarVisible && <Avatar source={message.user.avatar} />}
                             {message.user.avatar && !isAvatarVisible && <div style={{ marginLeft: '30px' }} />}
-                            <Bubble message={message} position={position} style={style} />
+                            <Bubble message={message} position={position} style={{...style, ...position === 'left' ? leftBubbleStyle : rightBubbleStyle }} />
                         </div>
                     </div>
                 );

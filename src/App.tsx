@@ -4,167 +4,138 @@ import Chat, { Message } from './components/chat/Chat';
 import './components/index.css';
 import moment from 'moment';
 import 'moment/locale/pl';
+import favicon from './favicon.png';
 
 const fakeMessages: Message[] = [
     {
         id: 1,
-        text: 'Hello world!',
-        createdAt: '2021-07-17 10:40:35',
+        text: 'Hello',
+        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         user: {
-            id: 1
-        }
-    },
-    {
-        text: 'Cześć w czym mogę Ci pomóc?',
-        createdAt: '2021-07-17 10:43:35',
-        user: {
-            id: 2,
+            id: 1,
             avatar: 'https://bodysize.org/wp-content/uploads/2018/01/Mia-Malkova-480x640.jpg'
         }
     },
     {
-        text: 'My job is to respond to you!',
-        createdAt: '2021-07-17 10:49:35',
+        id: 2,
+        text: 'Hello',
+        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         user: {
-            id: 3,
-            avatar: 'https://pbs.twimg.com/media/DUZ1jCIWkAA62dc.jpg'
+            id: 2,
+            avatar: 'https://lastfm.freetls.fastly.net/i/u/avatar170s/3095596d7697f67201a864dc5b2d8bf6'
+        }
+    },
+    {
+        id: 2,
+        text: 'How can i help you?',
+        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        user: {
+            id: 2,
+            avatar: 'https://lastfm.freetls.fastly.net/i/u/avatar170s/3095596d7697f67201a864dc5b2d8bf6'
         }
     }
 ]
 
 const App: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>(fakeMessages);
-    const [botMessage, setBotMessage] = useState<string>();
-    const [isTyping, setIsTyping] = useState(false);
+
+    const [leftIsTyping, setLeftIsTyping] = useState<boolean>(false);
+    const [rightIsTyping, setRightIsTyping] = useState<boolean>(false);
+
+    const [leftMessageValue, setLeftMessageValue] = useState<string>();
+    const [rightMessageValue, setRightMessageValue] = useState<string>();
 
     const onSend = (message: Message) => {
-        console.log(message);
         const updatedMessages = [...messages, message];
         setMessages(updatedMessages);
     }
 
-    const onSendBotMessage = () => {
-        if(!botMessage) return;
-
-        const updatedMessages: Message[] = [...messages, {
-            text: botMessage,
-            createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-            user: {
-                id: 2,
-                avatar: 'https://bodysize.org/wp-content/uploads/2018/01/Mia-Malkova-480x640.jpg'
-            }
-        }];
-        setBotMessage('');
-        setMessages(updatedMessages);
-        setIsTyping(false);
-    }
-
     useEffect(() => {
-        if(!botMessage) {
-            setIsTyping(false);
+        if(!leftMessageValue) {
+            setLeftIsTyping(false);
             return;
         }
 
-        setIsTyping(true);
+        setLeftIsTyping(true);
+
         const timer = window.setTimeout(() => {
-            setIsTyping(false);
+            setLeftIsTyping(false)
         }, 1500);
 
         return () => {
             window.clearTimeout(timer);
         }
-    }, [botMessage]);
-
-    const handleKeyDown = (e: any) => {
-        if (e.key === 'Enter') {
-            onSendBotMessage();
-        }
-    }
-
-    // sztuczna inteligencja script
+    }, [leftMessageValue]);
 
     useEffect(() => {
-        if(messages[messages.length-1]?.user.id !== 1) return;
+        if(!rightMessageValue) {
+            setRightIsTyping(false);
+            return;
+        }
 
-        let timer1: any;
+        setRightIsTyping(true);
 
         const timer = window.setTimeout(() => {
-
-            setIsTyping(true);
-
-            const lm = messages[messages.length-1].text;
-
-            let updatedMessages: Message[] = [];
-            let botMessage = 'Nie wiem co powiedzieć. Jestem tylko głupim botem.';
-
-            if(lm === 'siema') {
-                botMessage = 'Cześć';
-            }
-
-            if(lm === 'cześć' || lm === 'Cześć') {
-                botMessage = 'Cześć';
-            }
-
-            if(lm === 'co tam' || lm === 'co tam?' || lm === 'co u ciebie' || lm === 'co u ciebie?') {
-                botMessage = 'nic';
-            }
-
-            if(lm === 'Idziesz na spacer?') {
-                botMessage = 'Pewnie! Kiedy?';
-            }
-
-            if(lm === 'Co lubisz jeść?') {
-                botMessage = 'pizze';
-            }
-
-            if(lm === 'Czym się interesujesz?') {
-                botMessage = 'Netflix, podróże, muzyka.';
-            }
-
-            timer1 = window.setTimeout(() => {
-                updatedMessages = [...messages, {
-                    text: botMessage,
-                    createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-                    user: {
-                        id: 2,
-                        avatar: 'https://bodysize.org/wp-content/uploads/2018/01/Mia-Malkova-480x640.jpg'
-                    }
-                }];
-
-                setMessages(updatedMessages);
-                setIsTyping(false);
-            }, 1000);
-
-        }, 500);
+            setRightIsTyping(false)
+        }, 1500);
 
         return () => {
             window.clearTimeout(timer);
-            window.clearTimeout(timer1);
         }
-    }, [messages]);
-
-    // end
+    }, [rightMessageValue]);
 
     return (
         <div className="App">
-            <div className="friend-input">
-                <input
-                    type="text"
-                    value={botMessage}
-                    onChange={e => setBotMessage(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                />
-                <button onClick={onSendBotMessage}>wyślij</button>
-            </div>
+            <Chat
+                title="Kimmy Granger"
+                headerAvatar="https://lastfm.freetls.fastly.net/i/u/avatar170s/3095596d7697f67201a864dc5b2d8bf6"
+                user={{
+                    id: 1,
+                    avatar: 'https://bodysize.org/wp-content/uploads/2018/01/Mia-Malkova-480x640.jpg'
+                }}
+                minimized={false}
+                messages={messages}
+                onSend={(message: Message) => onSend(message)}
+                isTyping={rightIsTyping}
+                onInputTextChanged={value => setLeftMessageValue(value)}
+                containerStyle={{
+                    left: '20px',
+                    boxShadow: '0 0 5px 4px #ad9ffd'
+                }}
+                widgetStyle={{ left: '20px' }}
+                leftBubbleStyle={{
+                    backgroundColor: '#eeedfe',
+                }}
+                rightBubbleStyle={{
+                    backgroundColor: '#b140fe',
+                }}
+                backgroundColor="#cdc4ff"
+                headerStyle={{
+                    backgroundColor: '#ad9ffd',
+                    boxShadow: 'none'
+                }}
+                inputToolbarStyle={{
+                    backgroundColor: '#cdc4ff'
+                }}
+                inputStyle={{
+                    borderRadius: '50px',
+                    margin: '10px 0',
+                    padding: '14px 18px',
+                }}
+            />
+
             <Chat
                 title="Mia Malkova"
                 headerAvatar="https://bodysize.org/wp-content/uploads/2018/01/Mia-Malkova-480x640.jpg"
-                user={{ id: 1 }}
-                // minimized={false}
+                user={{
+                    id: 2,
+                    avatar: 'https://lastfm.freetls.fastly.net/i/u/avatar170s/3095596d7697f67201a864dc5b2d8bf6'
+                }}
+                minimized={false}
                 messages={messages}
                 onSend={(message: Message) => onSend(message)}
-                isTyping={isTyping}
-                // onInputTextChanged={(value) => {console.log(value)}}
+                isTyping={leftIsTyping}
+                onInputTextChanged={value => setRightMessageValue(value)}
             />
         </div>
     );
