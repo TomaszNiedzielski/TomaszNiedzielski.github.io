@@ -13,7 +13,7 @@ const fakeMessages: Message[] = [
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         user: {
             id: 1,
-            avatar: 'https://bodysize.org/wp-content/uploads/2018/01/Mia-Malkova-480x640.jpg'
+            avatar: 'https://falmed.pl/wp-content/uploads/2015/05/team1.jpg'
         }
     },
     {
@@ -22,16 +22,16 @@ const fakeMessages: Message[] = [
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         user: {
             id: 2,
-            avatar: 'https://lastfm.freetls.fastly.net/i/u/avatar170s/3095596d7697f67201a864dc5b2d8bf6'
+            avatar: 'https://iot2020.pl/wp-content/uploads/2015/04/speaker-1-v2.jpg'
         }
     },
     {
-        id: 2,
+        id: 3,
         text: 'How can i help you?',
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         user: {
             id: 2,
-            avatar: 'https://lastfm.freetls.fastly.net/i/u/avatar170s/3095596d7697f67201a864dc5b2d8bf6'
+            avatar: 'https://iot2020.pl/wp-content/uploads/2015/04/speaker-1-v2.jpg'
         }
     }
 ]
@@ -87,11 +87,11 @@ const App: React.FC = () => {
     return (
         <div className="App">
             <Chat
-                title="Kimmy Granger"
-                headerAvatar="https://lastfm.freetls.fastly.net/i/u/avatar170s/3095596d7697f67201a864dc5b2d8bf6"
+                title="Customized chat window"
+                headerAvatar="https://iot2020.pl/wp-content/uploads/2015/04/speaker-1-v2.jpg"
                 user={{
                     id: 1,
-                    avatar: 'https://bodysize.org/wp-content/uploads/2018/01/Mia-Malkova-480x640.jpg'
+                    avatar: 'https://falmed.pl/wp-content/uploads/2015/05/team1.jpg'
                 }}
                 minimized={false}
                 messages={messages}
@@ -100,7 +100,7 @@ const App: React.FC = () => {
                 onInputTextChanged={value => setLeftMessageValue(value)}
                 containerStyle={{
                     left: '20px',
-                    boxShadow: '0 0 5px 4px #ad9ffd'
+                    boxShadow: '6px 6px 5px 4px #ccc'
                 }}
                 widgetStyle={{ left: '20px' }}
                 leftBubbleStyle={{
@@ -125,11 +125,11 @@ const App: React.FC = () => {
             />
 
             <Chat
-                title="Mia Malkova"
-                headerAvatar="https://bodysize.org/wp-content/uploads/2018/01/Mia-Malkova-480x640.jpg"
+                title="Default chat window"
+                headerAvatar="https://falmed.pl/wp-content/uploads/2015/05/team1.jpg"
                 user={{
                     id: 2,
-                    avatar: 'https://lastfm.freetls.fastly.net/i/u/avatar170s/3095596d7697f67201a864dc5b2d8bf6'
+                    avatar: 'https://iot2020.pl/wp-content/uploads/2015/04/speaker-1-v2.jpg'
                 }}
                 minimized={false}
                 messages={messages}
